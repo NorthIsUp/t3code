@@ -155,3 +155,29 @@ it("splits a pasted pairing link and preserves the code during address edits", (
     act(() => root.unmount());
   }
 });
+
+it("fills the form from a pairing link in release builds without connecting", () => {
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
+  vi.stubGlobal("__DEV__", false);
+  harness.pendingConnectionError = null;
+  harness.connectPress.mockClear();
+  const container = document.createElement("div");
+  const root = createRoot(container);
+
+  try {
+    act(() =>
+      root.render(
+        <ConnectionsNewRouteScreen
+          route={{ params: { pairingUrl: "https://box.example.ts.net/pair#token=link-code" } }}
+        />,
+      ),
+    );
+    const address = container.querySelector<HTMLInputElement>('input[aria-label="Address"]')!;
+    const code = container.querySelector<HTMLInputElement>('input[aria-label="Code"]')!;
+    expect(address.value).toBe("https://box.example.ts.net");
+    expect(code.value).toBe("link-code");
+    expect(harness.connectPress).not.toHaveBeenCalled();
+  } finally {
+    act(() => root.unmount());
+  }
+});

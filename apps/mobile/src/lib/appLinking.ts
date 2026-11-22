@@ -1,4 +1,5 @@
 import type { NavigationState, PartialState } from "@react-navigation/native";
+import { readPairingAppLink } from "@t3tools/shared/remote";
 
 /**
  * The Expo dev client launches the app via
@@ -25,6 +26,15 @@ export function shouldHandleAppLink(url: string, cloudConfigured: boolean): bool
  */
 const CLOUD_ONLY_LINK_PATH =
   /^[a-z][\w+.-]*:\/*(?:[^/]*\/--\/)?(?:connect-onboarding|settings\/(?:auth|waitlist))\/*$/i;
+
+/**
+ * `t3code://pair?pairingUrl=…`, the link `t3 pair` prints and desktop opens, fills the pairing form.
+ * The user still checks the host and taps Connect, as after a QR scan.
+ */
+export function pairingAppLinkPath(path: string): string {
+  const pairingUrl = readPairingAppLink(`t3code://${path.replace(/^\/+/, "")}`);
+  return pairingUrl === null ? path : `connections/new?${new URLSearchParams({ pairingUrl })}`;
+}
 
 /** Keep the published draft URLs while using the root thread screen. */
 export function restoreDraftLinkState(

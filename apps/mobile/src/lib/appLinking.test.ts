@@ -4,6 +4,7 @@ import type { NavigationState } from "@react-navigation/native";
 import {
   findLinkedRoute,
   findStackRoute,
+  pairingAppLinkPath,
   restoreDraftLinkState,
   shouldHandleAppLink,
   updateLinkedRoute,
@@ -32,6 +33,32 @@ describe("shouldHandleAppLink", () => {
       expect(shouldHandleAppLink(url, true)).toBe(false);
     },
   );
+});
+
+describe("pairing app links", () => {
+  const pairingUrl = "https://box.example.ts.net/pair#token=ABC123";
+  const link = `pair?${new URLSearchParams({ pairingUrl })}`;
+
+  it("opens the pairing form filled from the link", () => {
+    const path = pairingAppLinkPath(link);
+    expect(path.split("?")[0]).toBe("connections/new");
+    expect(new URLSearchParams(path.split("?")[1]).get("pairingUrl")).toBe(pairingUrl);
+  });
+
+  it("accepts the leading slash some prefixes leave", () => {
+    expect(pairingAppLinkPath(`/${link}`)).toBe(pairingAppLinkPath(link));
+  });
+
+  it("drops anything but the pairing URL", () => {
+    const path = pairingAppLinkPath(`${link}&autoConnect=1&routeFor=env-1`);
+    expect([...new URLSearchParams(path.split("?")[1]).keys()]).toEqual(["pairingUrl"]);
+  });
+
+  it("leaves other links alone", () => {
+    for (const path of ["pair", "pair?other=1", "pairing?pairingUrl=x", "threads/abc", ""]) {
+      expect(pairingAppLinkPath(path)).toBe(path);
+    }
+  });
 });
 
 describe("cloud-only deep links", () => {
