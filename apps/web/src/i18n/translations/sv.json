@@ -1676,6 +1676,8 @@
   "b43aa445964e0107": "Viktigt",
   "4ebc13b08e0dc6f4": "Varning",
   "4cc0147705d106db": "Försiktighet",
+  "6750f6df8752994e": "Choice",
+  "5c8772e727c04218": "Question",
   "30c5aa7142450273": "Urklipps-API:t är inte tillgängligt vid kopiering av länken.",
   "8e7000df761167ac": "Kunde inte kopiera länken till urklipp.",
   "fa6548e543e3b47f": "Mall för {name}",
