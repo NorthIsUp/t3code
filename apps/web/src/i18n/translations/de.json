@@ -1675,6 +1675,8 @@
   "b43aa445964e0107": "Wichtig",
   "4ebc13b08e0dc6f4": "Warnung",
   "4cc0147705d106db": "Vorsicht",
+  "6750f6df8752994e": "Choice",
+  "5c8772e727c04218": "Question",
   "30c5aa7142450273": "Die Zwischenablage-API ist beim Kopieren des Links nicht verfügbar.",
   "8e7000df761167ac": "Der Link konnte nicht in die Zwischenablage kopiert werden.",
   "fa6548e543e3b47f": "Vorlage {name}",

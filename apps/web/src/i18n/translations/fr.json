@@ -1676,6 +1676,8 @@
   "b43aa445964e0107": "Important",
   "4ebc13b08e0dc6f4": "Avertissement",
   "4cc0147705d106db": "Attention",
+  "6750f6df8752994e": "Choice",
+  "5c8772e727c04218": "Question",
   "30c5aa7142450273": "L’API Presse-papiers n’est pas disponible pour copier le lien.",
   "8e7000df761167ac": "Impossible de copier le lien dans le presse-papiers.",
   "fa6548e543e3b47f": "Modèle {name}",

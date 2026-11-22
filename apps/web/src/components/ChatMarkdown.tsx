@@ -28,12 +28,14 @@ import {
   encodeComposerContextClipboardHtml,
 } from "@t3tools/shared/composerContextClipboard";
 import {
+  CircleHelpIcon,
   FileSpreadsheetIcon,
   FileTextIcon,
   GlobeIcon,
   ImageIcon,
   InfoIcon,
   LightbulbIcon,
+  ListChecksIcon,
   MailIcon,
   MessageSquareIcon,
   MessageSquareWarningIcon,
@@ -402,6 +404,19 @@ const GITHUB_ALERT_PRESENTATIONS: Record<
     Icon: OctagonAlertIcon,
     borderClassName: "border-red-500/70",
     titleClassName: "text-red-600 dark:text-red-400",
+  },
+  // Not GitHub alerts: an agent asking the reader to pick an option, or to answer in their own words.
+  choice: {
+    label: msg("Choice"),
+    Icon: ListChecksIcon,
+    borderClassName: "border-sky-500/70",
+    titleClassName: "text-sky-600 dark:text-sky-400",
+  },
+  question: {
+    label: msg("Question"),
+    Icon: CircleHelpIcon,
+    borderClassName: "border-sky-500/70",
+    titleClassName: "text-sky-600 dark:text-sky-400",
   },
 };
 

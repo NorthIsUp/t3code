@@ -37,6 +37,13 @@ describe("remarkGithubAlerts", () => {
     expect(html).toContain("Changes live transcript routing.");
   });
 
+  it.each(["choice", "question"])("tags T3's own %s callout", (kind) => {
+    const html = renderMarkdown(`> [!${kind.toUpperCase()}]\n> Pick one.`);
+
+    expect(html).toContain(`data-alert="${kind}"`);
+    expect(html).toContain("Pick one.");
+  });
+
   it("leaves a quote alone when the marker shares its line with anything else", () => {
     const html = renderMarkdown("> [!NOTE] an ordinary quote");
 
